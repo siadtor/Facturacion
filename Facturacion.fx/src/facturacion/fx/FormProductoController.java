@@ -5,6 +5,7 @@
  */
 package facturacion.fx;
 
+import Facturacion.bl.Producto;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -21,7 +22,10 @@ public class FormProductoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Producto producto = new Producto();
+        producto.setDescripcion("Huawei");
+        
+        System.out.println(producto.getDescripcion());
     }    
     
 }
