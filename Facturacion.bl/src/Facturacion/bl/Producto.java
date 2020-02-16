@@ -5,29 +5,44 @@
  */
 package Facturacion.bl;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author Sinoé Adalid Tovar
  */
 public class Producto {
-    private Integer codigo;
-    private String descripcion;
+    private SimpleIntegerProperty codigo;
+    private SimpleStringProperty descripcion;
+    
+    public Producto (){
+        codigo = new SimpleIntegerProperty();
+        descripcion = new SimpleStringProperty();
+    }
 
     //Metodos
     public Integer getCodigo() {
-        return codigo;
+        return codigo.get();
     }
 
     public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+        this.codigo.set(codigo);
+    }
+    
+    public SimpleIntegerProperty codigoProperty(){
+        return codigo;
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return descripcion.get();
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion.set(descripcion);
     }
     
+    public SimpleStringProperty descripcionProperty(){
+        return descripcion;
+    }
 }

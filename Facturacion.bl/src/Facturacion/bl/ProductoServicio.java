@@ -25,22 +25,39 @@ public class ProductoServicio {
     }
 
     //Metodo que obtiene la lista de productos.
-    public ArrayList<Producto> ObtenerProductos(){
+    public ArrayList<Producto> obtenerProductos(){
         return listadeProductos;    
+    }
+    
+    public void guardar(Producto producto){
+        if (producto.getCodigo().equals(0)){
+            Integer codigo = obtenerSiguienteCodigo();
+            producto.setCodigo(codigo);
+            listadeProductos.add(producto);
+        }
     }
     
     //Metodo para guardar los datos del producto
     private void almacenarProductos() {
         Producto p1 = new Producto();
-        p1.setCodigo(001);
+        p1.setCodigo(0);
         p1.setDescripcion("SONY VAIO");
         
         Producto p2 = new Producto();
-        p2.setCodigo(002);
+        p2.setCodigo(1);
         p2.setDescripcion("COMPAQ");
         
         listadeProductos.add(p1);
         listadeProductos.add(p2);
+    }
+
+    private Integer obtenerSiguienteCodigo() {
+        Integer maxCodigo = 1;
+        for(Producto producto: listadeProductos){
+            if (producto.getCodigo() >= maxCodigo)
+                maxCodigo = producto.getCodigo() + 1;
+        }
+        return maxCodigo;
     }
     
 }
