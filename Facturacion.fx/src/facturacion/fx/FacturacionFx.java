@@ -16,14 +16,24 @@ import javafx.stage.Stage;
  * @author Sinoé Adalid Tovar
  */
 public class FacturacionFx extends Application {
+    public static Boolean isSplashLoaded = false;
+    static Stage stage;
+    
+    public static Stage getStage(){
+    return stage;
+    }
+    
+   
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FormProducto.fxml"));
+        FacturacionFx.stage = stage;
+        Parent root = FXMLLoader.load(getClass().getResource("/facturacion/fx/Menu/main.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("Facturación");
         stage.show();
     }
 

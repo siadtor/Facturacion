@@ -6,58 +6,133 @@
 package Facturacion.bl;
 
 import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Sinoé Adalid Tovar
  */
 public class ProductoServicio {
-    //Declaracion de la clase ArrayList, permite almacenar elemneto de forma 
-    //dinamica.
-    private final ArrayList<Producto> listadeProductos;
-
-    //Constructor sin parametros
-    public ProductoServicio() {
-        listadeProductos = new ArrayList<>();
-        
-        almacenarProductos();
-        
-    }
-
     //Metodo que obtiene la lista de productos.
     public ArrayList<Producto> obtenerProductos(){
-        return listadeProductos;    
+        {
+       //Abriendo sesion y contectando con la base de datos.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+       //Iniciando la transaccion.
+        Transaction tx = session.beginTransaction();
+       //Haciendo la consulta.
+        Criteria query = session.createCriteria(Categoria.class);
+       //Trayendo una lista de productos.
+        List<Producto>resultado = query.list();
+       //Terminando la transaccion.
+        tx.commit();
+       //Cerrando sesion y desconectando con la base de datos.
+        session.close();
+       //Devolviendo el resultado de la lista de productos.
+        return new ArrayList<>(resultado);
+    }  
     }
     
-    public void guardar(Producto producto){
-        if (producto.getCodigo().equals(0)){
-            Integer codigo = obtenerSiguienteCodigo();
-            producto.setCodigo(codigo);
-            listadeProductos.add(producto);
-        }
-    }
-    
-    //Metodo para guardar los datos del producto
-    private void almacenarProductos() {
-        Producto p1 = new Producto();
-        p1.setCodigo(0);
-        p1.setDescripcion("SONY VAIO");
+    public ArrayList<Producto> obtenerProductos(String busqueda){
         
-        Producto p2 = new Producto();
-        p2.setCodigo(1);
-        p2.setDescripcion("COMPAQ");
-        
-        listadeProductos.add(p1);
-        listadeProductos.add(p2);
-    }
-
-    private Integer obtenerSiguienteCodigo() {
-        Integer maxCodigo = 1;
-        for(Producto producto: listadeProductos){
-            if (producto.getCodigo() >= maxCodigo)
-                maxCodigo = producto.getCodigo() + 1;
-        }
-        return maxCodigo;
+       //Abriendo sesion y contectando con la base de datos.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+       //Iniciando la transaccion.
+        Transaction tx = session.beginTransaction();
+       //Haciendo la consulta.
+        Criteria query = session.createCriteria(Producto.class);
+       //Filtro de busqueda.
+        query.add(Restrictions.like("Descripcion", busqueda, MatchMode.ANYWHERE));
+       //Trayendo una lista de productos.
+        List<Producto>resultado = query.list();
+       //Terminando la transaccion.
+        tx.commit();
+       //Cerrando sesion y desconectando con la base de datos.
+        session.close();
+       //Devolviendo el resultado de la lista de productos.
+        return new ArrayList<>(resultado);
+     
     }
     
+    public String guardar(Producto producto){
+        String resultado = validandoProducto(producto);
+       if (resultado.equals("")){
+       //Abriendo sesion y contectando con la base de datos.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+       //Iniciando la transaccion.
+        Transaction tx = session.beginTransaction();
+           
+        try {
+           //Guardando y actualizando los productos.
+            session.saveOrUpdate(producto);
+            tx.commit();
+               
+           } catch (Exception e) {
+               tx.rollback();
+               return e.getMessage();
+           } finally {
+            //Cerrando sesion y desconectando con la base de datos.
+            session.close();
+           }
+       
+        return "";
+        }
+        return resultado;
+    }
+    
+    public void borrar(Producto producto){
+         //Abriendo sesion y contectando con la base de datos.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+       //Iniciando la transaccion.
+        Transaction tx = session.beginTransaction();
+           
+        try {
+           //Eliminando los productos.
+            session.delete(producto);
+            tx.commit();
+               
+           } catch (Exception e) {
+               tx.rollback();
+               System.out.println(e.getMessage());;
+           } finally {
+            //Cerrando sesion y desconectando con la base de datos.
+            session.close();
+           }
+    }
+    
+    /*Creando un metodo para clonar los productos para retornar una nueva instancia
+    que no este vinculado con el binding.*/
+    public Producto clonar(Producto producto){
+    
+    Producto productoClonado = new Producto();
+    
+    productoClonado.setCodigo(producto.getCodigo());
+    productoClonado.setDescripcion(producto.getDescripcion());
+    productoClonado.setCategoria(producto.getCategoria());
+    productoClonado.setPrecio(producto.getPrecio());
+    productoClonado.setExistencia(producto.getExistencia());
+    
+    return productoClonado;
+    }
+    
+    private String validandoProducto(Producto producto) {
+        if (producto.getDescripcion() == null || producto.getDescripcion().equals("")){
+            return "Ingrese la descripcion";
+    }
+        if (producto.getCategoria() == null){
+            return "Selecciona un categoria";
+    }
+        if (producto.getPrecio() < 0){
+            return "Ingrese un precio mayor o igual que cero";
+    }
+        if (producto.getExistencia() < 0){
+            return "Ingrese una existencia mayor que cero";
+    }
+    return "";
+    }
 }

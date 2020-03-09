@@ -5,14 +5,22 @@
  */
 package facturacion.fx;
 
+import Facturacion.bl.Categoria;
+import Facturacion.bl.CategoriaServicio;
 import Facturacion.bl.Producto;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
 
 /**
@@ -23,16 +31,29 @@ import javafx.util.converter.NumberStringConverter;
 public class AgregarEditarProductoController implements Initializable {
     
     @FXML
-    Button btnCancelar;
+    JFXButton btnCancelar;
     
     @FXML
-    TextField txtCodigo;
+    JFXTextField txtCodigo;
     
     @FXML
-    TextField txtDescripcion;
+    JFXTextField txtDescripcion;
+    
+    @FXML
+    JFXComboBox cmbCategoria;
+    
+    @FXML
+    JFXTextField txtPrecio;
+    
+    @FXML
+    JFXTextField txtExistencia;
+    
+    
     
     private FormProductoController controller;
     private Producto producto;
+    private CategoriaServicio categoriaServicio;
+    private ObservableList<Categoria> data;
     
     public void setController(FormProductoController controller){
         this.controller = controller;
@@ -40,10 +61,34 @@ public class AgregarEditarProductoController implements Initializable {
     
     public void setProducto(Producto producto){
         this.producto = producto;
-    
-        
+         
         txtCodigo.textProperty().bindBidirectional(producto.codigoProperty(), new NumberStringConverter());
         txtDescripcion.textProperty().bindBidirectional(producto.descripcionProperty());
+        cmbCategoria.valueProperty().bindBidirectional(producto.categoriaProperty());
+        
+        cmbCategoria.setConverter(new StringConverter<Categoria>() {
+            @Override
+            public String toString(Categoria categoria) {
+                return categoria == null ? "" : categoria.getDescripcion();
+            }
+
+            @Override
+            public Categoria fromString(String string) {
+                if (data == null){
+                    return null;
+                }
+                
+                for (Categoria categoria: data){
+                    if (categoria.getDescripcion().equals(string)){
+                        return categoria;
+                    }
+                }
+                 return null;
+            }
+        });
+        
+        txtPrecio.textProperty().bindBidirectional(producto.precioProperty(), new NumberStringConverter());
+        txtExistencia.textProperty().bindBidirectional(producto.existenciaProperty(), new NumberStringConverter());
     }
     
     /**
@@ -51,12 +96,22 @@ public class AgregarEditarProductoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+       categoriaServicio = new CategoriaServicio();
+       data = FXCollections.observableArrayList(categoriaServicio.obtenerCategoria());
+       cmbCategoria.setItems(data);
     }    
     
     public void aceptar(){
-        controller.guardar(producto);
+        String resultado =  controller.guardar(producto);
+        if (resultado.equals("")){
         cerrar();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Productos");
+            alert.setHeaderText("Error al validar los datos");
+            alert.setContentText(resultado);
+            alert.showAndWait();
+        }
     }
     
     public void cancelar(){
