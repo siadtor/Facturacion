@@ -51,8 +51,8 @@ Contributor(s):
     <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
     <!-- Echo all executed SQL to stdout -->
     <property name="show_sql">true</property>
-    <!-- Drop and re-create the database shema on startup -->
-    <property name="hbm2dll.auto">update</property>
+    <!-- Drop and re-create the database schema on startup -->
+    <property name="hbm2ddl.auto">update</property>
     <mapping class="Facturacion.bl.Categoria"/>
     <mapping class="Facturacion.bl.Producto"/>
   </session-factory>

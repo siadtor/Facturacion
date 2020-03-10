@@ -26,13 +26,14 @@ public class ProductoServicio {
        //Iniciando la transaccion.
         Transaction tx = session.beginTransaction();
        //Haciendo la consulta.
-        Criteria query = session.createCriteria(Categoria.class);
+        Criteria query = session.createCriteria(Producto.class);
        //Trayendo una lista de productos.
-        List<Producto>resultado = query.list();
+        List<Producto> resultado = query.list();
        //Terminando la transaccion.
         tx.commit();
        //Cerrando sesion y desconectando con la base de datos.
         session.close();
+            System.out.println("-->" + resultado);
        //Devolviendo el resultado de la lista de productos.
         return new ArrayList<>(resultado);
     }  
@@ -47,7 +48,7 @@ public class ProductoServicio {
        //Haciendo la consulta.
         Criteria query = session.createCriteria(Producto.class);
        //Filtro de busqueda.
-        query.add(Restrictions.like("Descripcion", busqueda, MatchMode.ANYWHERE));
+        query.add(Restrictions.like("descripcion", busqueda, MatchMode.ANYWHERE));
        //Trayendo una lista de productos.
         List<Producto>resultado = query.list();
        //Terminando la transaccion.

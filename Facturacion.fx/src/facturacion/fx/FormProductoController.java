@@ -71,7 +71,7 @@ public class FormProductoController implements Initializable {
     
     //Permite ver los cambios cuando ocurren a la lista.
     ObservableList<Producto> data;
-    
+   
     //Creando atributo.
     ProductoServicio servicio;
     
@@ -109,11 +109,11 @@ public class FormProductoController implements Initializable {
     }
     
     public void busqueda(){
-        tableView.setItems(buscadordeProducto(txtBusqueda.getText()));
+        cargarDatos();
         
     }
     
-    private ObservableList<Producto> buscadordeProducto(String temp){
+   /* ObservableList<Producto> buscadordeProducto(String temp){
         if(temp.isEmpty()||temp.equals("")){
         return data;
         }else{
@@ -129,6 +129,7 @@ public class FormProductoController implements Initializable {
 
             
  }
+*/
     
     private void abrirVentanaModal(Producto producto, String titulo) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AgregarEditarProducto.fxml"));
@@ -148,10 +149,14 @@ public class FormProductoController implements Initializable {
     }
 
     private void cargarDatos() {
+        if (txtBusqueda.getText() == null || txtBusqueda.equals("")){
         data = FXCollections.observableArrayList(servicio.obtenerProductos());
+        } else {
+        data = FXCollections.observableArrayList(servicio.obtenerProductos(txtBusqueda.getText()));
+        }
         tableView.setItems(data);
         tableView.refresh();
-    }
+        }
 
     private void definirColumnaEditar() {
        colEditar.setCellFactory(param -> new TableCell<String, String>(){
