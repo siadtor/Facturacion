@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Facturacion.fx.jar" size="60080" download="eager" />
-    <jar href="lib\Facturacion.bl.jar" size="13850" download="eager" />
+    <jar href="Facturacion.fx.jar" size="62610" download="eager" />
+    <jar href="lib\Facturacion.bl.jar" size="17104" download="eager" />
     <jar href="lib\antlr-2.7.7.jar" size="437548" download="eager" />
     <jar href="lib\c3p0-0.9.2.1.jar" size="422423" download="eager" />
     <jar href="lib\dom4j-1.6.1.jar" size="309995" download="eager" />

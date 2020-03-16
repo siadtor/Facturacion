@@ -23,13 +23,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -66,7 +66,12 @@ public class FormProductoController implements Initializable {
     private TableColumn colBorrar;
     
     @FXML
+    private TableColumn colImagen;
+            
+    @FXML
     private TextField txtBusqueda;
+    
+     
   
     
     //Permite ver los cambios cuando ocurren a la lista.
@@ -91,6 +96,7 @@ public class FormProductoController implements Initializable {
         
         definirColumnaEditar();
         definirColumnaBorrar();
+        definirColumnaImagen();
         
         cargarDatos();
     }    
@@ -109,11 +115,11 @@ public class FormProductoController implements Initializable {
     }
     
     public void busqueda(){
-        cargarDatos();
+      tableView.setItems(buscadordeProducto(txtBusqueda.getText()));
         
     }
     
-   /* ObservableList<Producto> buscadordeProducto(String temp){
+    ObservableList<Producto> buscadordeProducto(String temp){
         if(temp.isEmpty()||temp.equals("")){
         return data;
         }else{
@@ -129,7 +135,7 @@ public class FormProductoController implements Initializable {
 
             
  }
-*/
+
     
     private void abrirVentanaModal(Producto producto, String titulo) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AgregarEditarProducto.fxml"));
@@ -149,11 +155,7 @@ public class FormProductoController implements Initializable {
     }
 
     private void cargarDatos() {
-        if (txtBusqueda.getText() == null || txtBusqueda.equals("")){
-        data = FXCollections.observableArrayList(servicio.obtenerProductos());
-        } else {
-        data = FXCollections.observableArrayList(servicio.obtenerProductos(txtBusqueda.getText()));
-        }
+        data= FXCollections.observableArrayList(servicio.obtenerProductos());
         tableView.setItems(data);
         tableView.refresh();
         }
@@ -230,6 +232,35 @@ public class FormProductoController implements Initializable {
         cargarDatos();
         }
   }
+
+    private void definirColumnaImagen() {
+        colImagen.setCellFactory(param -> new TableCell<String, String>(){
+           final ImageView img = new ImageView();
+           
+           @Override
+           public void updateItem(String item, boolean empty){
+           super.updateItem(item, empty);
+           if (empty){
+               setGraphic(null);
+               setText(null);
+           } else {
+                        Producto producto = (Producto) getTableRow().getItem();
+                        img.imageProperty().set(producto.getVerImagen());
+                        img.setFitWidth(100);
+                        img.setPreserveRatio(true);
+                        setGraphic(img);
+                        setText(null);
+           }
+           }
+           });
+          
+              
+           }
+           
 }
+
+           
+    
+
 
 
