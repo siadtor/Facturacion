@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" focusTraversable="true" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white; -fx-border-color: black;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facturacion.fx.AgregarEditarProductoController">
+   <children>
+      <JFXTextField fx:id="txtCodigo" labelFloat="true" layoutX="65.0" layoutY="74.0" prefHeight="25.0" prefWidth="48.0" promptText="Código" />
+      <JFXComboBox fx:id="cmbCategoria" editable="true" focusColor="#6e2525" labelFloat="true" layoutX="64.0" layoutY="175.0" prefWidth="150.0" promptText="Categoría" unFocusColor="#405aa8" />
+      <JFXTextField fx:id="txtPrecio" labelFloat="true" layoutX="66.0" layoutY="226.0" promptText="Precio" />
+      <JFXTextField fx:id="txtExistencia" labelFloat="true" layoutX="65.0" layoutY="279.0" promptText="Existente" />
+      <JFXButton fx:id="btnAceptar" buttonType="RAISED" layoutX="66.0" layoutY="355.0" mnemonicParsing="false" onAction="#aceptar" style="-fx-border-color: black;" styleClass="jfx-button-ok" text="Aceptar" />
+      <JFXButton fx:id="btnCancelar" buttonType="RAISED" layoutX="139.0" layoutY="355.0" mnemonicParsing="false" onAction="#cancelar" style="-fx-border-color: black;" styleClass="jfx-button-danger" text="Cancelar" />
+      <JFXTextField fx:id="txtDescripcion" labelFloat="true" layoutX="66.0" layoutY="123.0" prefHeight="25.0" prefWidth="198.0" promptText="Descripción" />
+      <VBox alignment="CENTER" layoutX="316.0" layoutY="26.0" prefHeight="400.0" prefWidth="400.0" style="-fx-border-color: black;" AnchorPane.rightAnchor="20.0">
+         <children>
+            <ImageView fx:id="imagenProducto" fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
+      <JFXButton fx:id="btnCambiarImagen" alignment="CENTER" layoutX="350.0" layoutY="438.0" onAction="#cambiarImagen" style="-fx-border-color: black;" styleClass="jfx-button-info" text="Cambiar Imagen" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" />
+      <JFXButton fx:id="btnEliminarImagen" alignment="CENTER" layoutX="478.0" layoutY="438.0" onAction="#eliminarImagen" style="-fx-border-color: black;" styleClass="jfx-button-danger" text="Eliminar Imagen" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="300f9a7a-3519-4896-a99c-e74e4806917a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="60"/>
+	<queryString>
+		<![CDATA[select id, fecha, impuesto, total, activa from Factura;]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="impuesto" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="activa" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="impuesto_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{impuesto}]]></variableExpression>
+	</variable>
+	<variable name="total_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="117" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="453" y="0" width="100" height="20" uuid="d66830c8-43bf-4c93-86dc-d2b766102347"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date();]]></textFieldExpression>
+			</textField>
+			<textField pattern="K:mm:ss a">
+				<reportElement x="339" y="0" width="100" height="20" uuid="edc8fd9c-105b-4b11-9af0-03e52f034351"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date();]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="124" y="36" width="329" height="35" uuid="eef99652-80da-47bb-8fb3-d8bb2720a142"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Berlin Sans FB Demi" size="20" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE FACTURA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="4" y="0" width="80" height="20" uuid="7652f371-741d-460e-9e62-bc87fbe07411"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["PÁGINA "+$V{PAGE_NUMBER}+" DE"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="84" y="0" width="40" height="20" uuid="ffcb6452-0a6c-410d-9147-e31fa5a71771"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" isUsingCache="false" evaluationTime="Auto">
+				<reportElement isPrintRepeatedValues="false" x="4" y="20" width="99" height="97" uuid="f34da1e0-5abd-4d70-a442-04c4139ad181"/>
+				<imageExpression><![CDATA["facturacion/fx/logo (3).jpg"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" hAlign="Center" isUsingCache="false" evaluationTime="Auto">
+				<reportElement isPrintRepeatedValues="false" x="456" y="20" width="99" height="97" uuid="979b61aa-3b49-4e2d-8d3c-0e4559af05b1"/>
+				<imageExpression><![CDATA["facturacion/fx/logo (2).jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="19" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="1" width="120" height="20" uuid="87cc1ec4-8206-443d-b02e-346c20bc9de5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° de Factura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="100" height="20" uuid="4f1b2ab7-6d6b-44dc-9049-9572716cf106"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="0" width="100" height="20" uuid="cd61f3b0-1474-460a-9352-3652bcd37f22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Impuesto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="0" width="100" height="21" uuid="6b29bad4-3a02-44c1-adba-94ac961a3910"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="86" splitType="Stretch">
+			<line>
+				<reportElement x="4" y="0" width="551" height="1" uuid="cd0b486c-6e89-48fd-b92c-fbaf6628d3ba"/>
+			</line>
+			<textField>
+				<reportElement x="4" y="1" width="120" height="20" uuid="56caf468-8083-43b4-b15c-6370fcc61566"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="0" width="100" height="20" uuid="36d49563-050b-4614-880b-fb44ba10beb1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="278" y="1" width="100" height="20" uuid="26943f82-f356-44f0-aaa9-52269e920811"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{impuesto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="403" y="1" width="100" height="20" uuid="adae6e99-1738-47d0-b23c-32ba13a99096"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="278" y="0" width="100" height="20" uuid="beb5a59c-89c3-4d57-875f-8b80eccd7999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{impuesto_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="403" y="0" width="100" height="20" uuid="c4a1c5ef-c8eb-4e13-b071-ad3c26aaf498"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="178" y="0" width="100" height="20" uuid="62e92b9f-2463-4569-8d8c-29bf5236deef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Suma Total:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

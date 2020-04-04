@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" style="-fx-background-color: white;" stylesheets="@main.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facturacion.fx.FormReporteProductosController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="406.0" stylesheets="@main.css">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" maxWidth="405.0" prefHeight="47.0" prefWidth="405.0" style="-fx-font-size: 32; -fx-font-weight: Bold;" text="REPORTE DE PRODUCTOS" textAlignment="CENTER" textFill="#0565ff" textOverrun="CENTER_WORD_ELLIPSIS" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <JFXButton fx:id="btnGenerar" buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="2.0" onAction="#generarReporte" styleClass="jfx-button-info" stylesheets="@main.css" text="Generar" textAlignment="CENTER" />
+   </children>
+</VBox>

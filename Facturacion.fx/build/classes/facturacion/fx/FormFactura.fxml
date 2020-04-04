@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox minHeight="400.0" minWidth="400.0" style="-fx-background-color: white;" stylesheets="@main.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facturacion.fx.FormFacturaController">
+   <children>
+      <HBox prefHeight="200.0" prefWidth="1371.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <children>
+                     <Label contentDisplay="CENTER" graphicTextGap="6.0" maxWidth="500.0" prefHeight="48.0" prefWidth="468.0" style="-fx-font-size: 32; -fx-font-weight: Bold;" text="FACTURACION" textAlignment="CENTER" textFill="#0565ff" textOverrun="CENTER_WORD_ELLIPSIS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" top="60.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <JFXButton onAction="#nuevaFactura" styleClass="jfx-button-info" text="Nueva Factura" />
+               </children>
+               <padding>
+                  <Insets right="100.0" />
+               </padding>
+            </HBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox maxWidth="425.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <TableView fx:id="tableView" maxWidth="325.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="colDescripcion" maxWidth="160.0" minWidth="160.0" prefWidth="160.0" style="-fx-alignment: CENTER-LEFT;" text="Descripcion" />
+                            <TableColumn fx:id="colPrecio" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" style="-fx-alignment: CENTER-RIGHT;" text="Precio" />
+                              <TableColumn fx:id="colEliminar" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" style="-fx-alignment: CENTER;" />
+                          </columns>
+                        </TableView>
+                        <VBox alignment="CENTER" maxHeight="200.0" minHeight="200.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="lblTotal" style="-fx-font-size: 30;" text="TOTAL: 0.00" />
+                                          <Label fx:id="lblImpuesto" style="-fx-font-size: 16;" text="IMPUESTOS: 0.00" />
+                                       </children>
+                                    </VBox>
+                                    <VBox HBox.hgrow="NEVER">
+                                       <HBox.margin>
+                                          <Insets top="5.0" />
+                                       </HBox.margin>
+                                       <children>
+                                          <JFXButton onAction="#guardar" styleClass="jfx-button-ok" text="Guardar">
+                                             <VBox.margin>
+                                                <Insets right="20.0" />
+                                             </VBox.margin></JFXButton>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <TabPane fx:id="tabPaneProducts" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
+               </children>
+            </VBox>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+      </HBox>
+   </children>
+</VBox>

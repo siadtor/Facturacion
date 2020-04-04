@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" style="-fx-background-color: white;" stylesheets="@main.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facturacion.fx.FormReporteFacturasController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" maxWidth="405.0" prefHeight="47.0" prefWidth="405.0" style="-fx-font-size: 32; -fx-font-weight: Bold;" text="REPORTE DE FACTURAS" textAlignment="CENTER" textFill="#0565ff" textOverrun="CENTER_WORD_ELLIPSIS" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="406.0">
+               <children>
+                  <HBox VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <JFXDatePicker fx:id="datePickerFechaInicial" prefWidth="184.0" promptText="Fecha Inicial" />
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" />
+                        <VBox alignment="CENTER">
+                           <children>
+                              <JFXDatePicker fx:id="datePickerFechaFinal" promptText="Fecha Final" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <JFXButton fx:id="btnGenerar" buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="2.0" onAction="#generarReporte" styleClass="jfx-button-info" stylesheets="@main.css" text="Generar" textAlignment="CENTER" />
+   </children>
+</VBox>
