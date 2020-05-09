@@ -57,6 +57,9 @@ Contributor(s):
     <mapping class="Facturacion.bl.Producto"/>
     <mapping class="Facturacion.bl.Factura"/>
     <mapping class="Facturacion.bl.FacturaDetalle"/>
+    <mapping class="Facturacion.bl.Usuario"/>
+    
+
 
   </session-factory>
 </hibernate-configuration>

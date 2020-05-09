@@ -17,6 +17,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -45,6 +47,7 @@ public class MainController implements Initializable, AbrirFormularioCallback {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         if (!FacturacionFx.isSplashLoaded) {
             loadSplashScreen();
         }
@@ -55,6 +58,8 @@ public class MainController implements Initializable, AbrirFormularioCallback {
             SidePanelController controller = loader.getController();
             controller.setCallback(this);
             drawer.setSidePane(box);
+            
+            abrirFormularioPredeterminado();
             
             FitControlsToWindow();
         } catch (IOException ex) {
@@ -113,6 +118,9 @@ public class MainController implements Initializable, AbrirFormularioCallback {
         try {
             String nombreFXML = "";
             switch(nombreFormulario){
+                case "Inicio":
+                    nombreFXML = "FormGraficos.fxml";
+                    break;
                 case "Productos":
                     nombreFXML = "FormProducto.fxml";
                     break;
@@ -132,6 +140,10 @@ public class MainController implements Initializable, AbrirFormularioCallback {
                     nombreFXML = "FormReporteFacturas.fxml";
                     break;
                 }
+                
+                case "Cerrar Sesion":
+                    cerrarSesion();
+                    break;
               
             }
             form = FXMLLoader.load(getClass().getResource(("/facturacion/fx/" + nombreFXML)));
@@ -173,6 +185,36 @@ public class MainController implements Initializable, AbrirFormularioCallback {
         if (form != null) {
             form.setPrefWidth(stage.getWidth());
             form.setPrefHeight(stage.getHeight());
+        }
+    }
+
+    private void cerrarSesion() throws IOException {
+        Stage stage = FacturacionFx.getStage();
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("/facturacion/fx/FormLogin.fxml"));
+        
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        stage.setTitle("Ingresar al Sistema");
+        stage.show();    }
+
+    private void abrirFormularioPredeterminado() {
+         String role = FacturacionFx.getUsuarioAutenticado().getRole();
+        
+        switch(role) {
+            case "administrador": {
+                abrirFormulario("Inicio");
+                break;
+            }
+            case "cajero": {
+                abrirFormulario("Facturas");              
+                break;
+            }
+            case "inventario": {
+                abrirFormulario("Productos");                   
+                break;
+            }    
         }
     }
 }

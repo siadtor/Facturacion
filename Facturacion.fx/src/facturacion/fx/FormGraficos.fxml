@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" style="-fx-background-color: white;" stylesheets="@main.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facturacion.fx.FormGraficosController">
+   <children>
+      <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                  <BarChart fx:id="barChartVentas" legendVisible="false" title="Ventas de los últimos 7 días.">
+                    <xAxis>
+                      <CategoryAxis label="Últimos 7 días" side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis label="Ventas Netas" side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+               </children>
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                  <PieChart fx:id="pieChartVentas" title="Ventas por Categorías de Producto" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label style="-fx-font-size: 20;" text="ÚLTIMAS 10 FACTURAS EMITIDAS" />
+                  <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
+                    <columns>
+                      <TableColumn fx:id="colCod" maxWidth="200.0" minWidth="100.0" prefWidth="150.0" style="-jfx-alignment: CENTER;" text="No de Factura" />
+                      <TableColumn fx:id="colFecha" maxWidth="300.0" minWidth="200.0" prefWidth="200.0" style="-jfx-alignment: CENTER-LEFT;" text="Fecha" />
+                      <TableColumn fx:id="colImpuesto" maxWidth="300.0" minWidth="150.0" prefWidth="150.0" style="-jfx-alignment: CENTER-RIGHT;" text="Impuesto" />
+                      <TableColumn fx:id="colTotal" maxWidth="300.0" minWidth="200.0" prefWidth="200.0" style="-jfx-alignment: CENTER;" text="Total" />
+                        <TableColumn fx:id="colActiva" maxWidth="300.0" style="-jfx-alignment: CENTER;" text="Activa" />
+                    </columns>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                    </TableView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+   </padding>
+</VBox>

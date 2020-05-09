@@ -10,8 +10,10 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -60,7 +62,7 @@ public class FacturaServicio {
        
     }
 
-     public ArrayList<Factura> obtenerFacturas(Date fechaInicial, Date fechaFinal){
+    public ArrayList<Factura> obtenerFacturas(Date fechaInicial, Date fechaFinal){
         {
        //Abriendo sesion y contectando con la base de datos.
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -71,7 +73,33 @@ public class FacturaServicio {
         //Agregando restricciones a la fecha.
         query.add(Restrictions.ge("fecha", fechaInicial));
         query.add(Restrictions.le("fecha", fechaFinal));
+        query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
        
+       //Trayendo una lista de productos.
+        List<Factura> resultado = query.list();
+       //Terminando la transaccion.
+        tx.commit();
+       //Cerrando sesion y desconectando con la base de datos.
+        session.close();
+            System.out.println("-->" + resultado);
+       //Devolviendo el resultado de la lista de productos.
+        return new ArrayList<>(resultado);
+    }  
+    }
+    
+     public ArrayList<Factura> obtenerUltimasFacturasEmitidas(){
+        {
+       //Abriendo sesion y contectando con la base de datos.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+       //Iniciando la transaccion.
+        Transaction tx = session.beginTransaction();
+       //Haciendo la consulta.
+        Criteria query = session.createCriteria(Factura.class);
+        query.addOrder(Order.desc("fecha"));
+        query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        query.setFetchMode("FacturaDetalle", FetchMode.SELECT);
+        query.setMaxResults(10);
+        
        //Trayendo una lista de productos.
         List<Factura> resultado = query.list();
        //Terminando la transaccion.

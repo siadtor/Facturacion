@@ -5,11 +5,14 @@
  */
 package facturacion.fx;
 
+import Facturacion.bl.Usuario;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -18,22 +21,38 @@ import javafx.stage.Stage;
 public class FacturacionFx extends Application {
     public static Boolean isSplashLoaded = false;
     static Stage stage;
+    static Usuario usuario;
     
     public static Stage getStage(){
     return stage;
     }
     
+    public static Usuario getUsuarioAutenticado(){
+        return usuario;
+    }
+    public static void setUsuarioAutenticado(Usuario usuario){
+        FacturacionFx.usuario= usuario;
+    }
+    
+    
    
     
     @Override
     public void start(Stage stage) throws Exception {
+        
+        stage.setOnCloseRequest((WindowEvent t) -> {
+            Platform.exit();
+            System.exit(0);
+        });
+        
         FacturacionFx.stage = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("/facturacion/fx/Menu/main.fxml"));
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("/facturacion/fx/FormLogin.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
-        stage.setTitle("Facturación");
+        stage.setTitle("Ingresar al Sistema");
         stage.show();
     }
 
