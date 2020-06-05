@@ -79,9 +79,9 @@ public class FormGraficosController implements Initializable {
         ArrayList<Factura> facturas = 
                 FacturaServicio.obtenerUltimasFacturasEmitidas();
         
-        colCod.setCellValueFactory(new PropertyValueFactory("Id"));
+        colCod.setCellValueFactory(new PropertyValueFactory("id"));
         colFecha.setCellValueFactory(new PropertyValueFactory("Fecha"));
-        colActiva.setCellValueFactory(new PropertyValueFactory("Activa"));
+        
         colImpuesto.setCellFactory(param -> new TableCell<Factura, Double>(){
             @Override
             
@@ -115,7 +115,7 @@ public class FormGraficosController implements Initializable {
             }
         });
         
-        
+        colActiva.setCellValueFactory(new PropertyValueFactory("activa"));
         ObservableList<Factura> data = FXCollections.observableArrayList(facturas);
         tableView.setItems(data);
     }

@@ -15,7 +15,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                <children>
-                     <Label contentDisplay="CENTER" graphicTextGap="6.0" maxWidth="500.0" prefHeight="48.0" prefWidth="468.0" style="-fx-font-size: 32; -fx-font-weight: Bold;" text="FACTURACION" textAlignment="CENTER" textFill="#0565ff" textOverrun="CENTER_WORD_ELLIPSIS">
+                     <Label contentDisplay="CENTER" graphicTextGap="6.0" maxWidth="500.0" prefHeight="48.0" prefWidth="468.0" style="-fx-font-size: 32; -fx-font-weight: Bold;" text="FACTURACIÓN" textAlignment="CENTER" textFill="#0565ff" textOverrun="CENTER_WORD_ELLIPSIS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

@@ -36,7 +36,7 @@ public class FacturaServicio {
              for(FacturaDetalle detalle: Factura.getFacturaDetalle()){
                  Integer id = detalle.getProducto().getCodigo();
                  
-                 Criteria query= session.createCriteria(Producto.class);
+                 Criteria query = session.createCriteria(Producto.class);
                  query.add(Restrictions.eq("id", id));
                  query.setMaxResults(1);
                  
@@ -95,10 +95,10 @@ public class FacturaServicio {
         Transaction tx = session.beginTransaction();
        //Haciendo la consulta.
         Criteria query = session.createCriteria(Factura.class);
-        query.addOrder(Order.desc("fecha"));
+        query.addOrder(Order.desc("id"));
         query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         query.setFetchMode("FacturaDetalle", FetchMode.SELECT);
-        query.setMaxResults(10);
+        query.setMaxResults(31);
         
        //Trayendo una lista de productos.
         List<Factura> resultado = query.list();
